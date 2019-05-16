@@ -4,15 +4,17 @@ import org.openqa.selenium.WebElement;
 import org.openqa.selenium.chrome.ChromeDriver;
 import org.openqa.selenium.interactions.Actions;
 import org.testng.Assert;
-import org.testng.annotations.AfterTest;
-import org.testng.annotations.BeforeTest;
-import org.testng.annotations.Test;
+import org.testng.annotations.*;
+
+import java.util.concurrent.TimeUnit;
 
 import static org.testng.AssertJUnit.assertEquals;
 
 public class testclass {
 
     private WebDriver driver;
+    private String login="test_olga";
+    private String password="123456";
 
     @BeforeTest
     public void createDriver() {
@@ -21,30 +23,42 @@ public class testclass {
  //       driver.navigate().to("http://127.0.0.1/wordpress/wp-login.php");
  //       driver.navigate().to("http://localhost/wordpress/wp-login.php");
         driver.navigate().to("http://v999140x.beget.tech/wp-login.php");
+        driver.manage().timeouts().pageLoadTimeout(60, TimeUnit.SECONDS);
+
 
     }
 
     @Test
-    public void login() {
+  //  @Parameters({"login, password"})
+    public void Authorization() {
 
         WebElement loginUser = driver.findElement(By.xpath("//input[@id='user_login']"));
   //      loginUser.sendKeys("user1");
-        loginUser.sendKeys("test_olga");
-        WebElement loginPassword = driver.findElement(By.xpath("//*[@id='loginform']//input[@id='user_pass']"));
+        loginUser.sendKeys(login);
+        WebElement loginPassword = driver.findElement(By.xpath("//input[@id='user_pass']"));
   //      loginPassword.sendKeys("user1@gmail.com");
-        loginPassword.sendKeys("123456");
+        loginPassword.sendKeys(password);
         WebElement btnEnter = driver.findElement(By.xpath("//p[@class='submit']/input[@type='submit']"));
         btnEnter.click();
-        WebElement displayName = driver.findElement(By.xpath("//a[contains(text(),'Привет']/span"));
-        Assert.assertEquals("User1", displayName.getText());
+        WebElement displayName = driver.findElement(By.xpath("//a[contains(text(),'Привет')]/span"));
+  /*      Actions actions = new Actions(driver);
+        actions.moveToElement(displayName).build().perform();
+        driver.manage().timeouts().implicitlyWait(15, TimeUnit.SECONDS);
+        WebElement usernameDisplay = driver.findElement(By.xpath("//span[@class='username']"));
+       actions.moveToElement(usernameDisplay).build().perform();
+  */
+        Assert.assertEquals(displayName.getText(), login);
+
     }
 
- /*   public void addArticle() {
+    @Test
+   public void addArticle() {
         WebElement add = driver.findElement(By.xpath("//div[@aria-label='Верхняя панель']//span[contains (text(), 'Добавить')]"));
-        Actions actions = new Actions(driver);
-        actions.moveToElement(add).build().perform();
-        WebElement addNote = driver.findElement(By.xpath("//li[@class='menupop']//a[contains(text(),'Запись')]"));
-        addNote.click();
+     //   Actions actions = new Actions(driver);
+     //   actions.moveToElement(add).build().perform();
+     //   WebElement addNote = driver.findElement(By.xpath("//li[@class='menupop']//a[contains(text(),'Запись')]"));
+     //   addNote.click();
+        add.click();
         WebElement btnPublish =driver.findElement(By.xpath("//div[@class='edit-post-header__settings']//button[contains(text(),'Опубликовать')]"));
         btnPublish.isDisplayed();
         WebElement textHeadline =driver.findElement(By.xpath("//div[@class='editor-post-title']//textarea"));
@@ -63,7 +77,7 @@ public class testclass {
 
     }
 
-*/
+
 
     @AfterTest
     public void quitDriver() {
