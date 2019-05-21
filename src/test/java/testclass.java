@@ -64,20 +64,24 @@ public class testclass {
         actions.moveToElement(add).build().perform();
         WebElement addNote = driver.findElement(By.xpath("//li[@class='menupop']//a[contains(text(),'Запись')]"));
         addNote.click();
+        driver.manage().timeouts().pageLoadTimeout(60, TimeUnit.SECONDS);
+        driver.manage().timeouts().implicitlyWait(20,TimeUnit.SECONDS);
      //   add.click();
         WebElement btnPublish =driver.findElement(By.xpath("//div[@class='edit-post-header__settings']//button[contains(text(),'Опубликовать')]"));
         btnPublish.isDisplayed();
         if (driver.findElement(By.xpath("//div[@class='components-popover__content']")).isDisplayed())
         {
-            driver.findElement(By.xpath("//div[@class='components-popover__content']")).click();
+            driver.findElement(By.xpath("//button[@aria-label='Отключить советы']")).click();
         }
 
         WebElement textHeadline =driver.findElement(By.xpath("//div[@class='editor-post-title']//textarea"));
         textHeadline.click();
         textHeadline.sendKeys("New Headline");
-        WebElement textBodyline =driver.findElement(By.xpath("////div[@class='editor-rich-text']//p"));
+        driver.manage().timeouts().implicitlyWait(20,TimeUnit.SECONDS);
+        WebElement textBodyline =driver.findElement(By.xpath("//textarea[contains(@class, 'editor-default-block-appender')]"));
         textBodyline.click();
-        textBodyline.sendKeys("This is your new post.");
+        driver.findElement(By.xpath("//p[@role='textbox']")).sendKeys("This is your new post.");
+        driver.manage().timeouts().implicitlyWait(20,TimeUnit.SECONDS);
         btnPublish.isEnabled();
         btnPublish.click();
         btnPublish.click();
