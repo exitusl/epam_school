@@ -15,6 +15,8 @@ public class testclass {
     private WebDriver driver;
     private String login="test_olga";
     private String password="123456";
+    private String Headline="New Headline";
+    private String textBody="This is your new post";
 
     @BeforeMethod
     public void createDriver() {
@@ -76,11 +78,11 @@ public class testclass {
 
         WebElement textHeadline =driver.findElement(By.xpath("//div[@class='editor-post-title']//textarea"));
         textHeadline.click();
-        textHeadline.sendKeys("New Headline");
+        textHeadline.sendKeys(Headline);
         driver.manage().timeouts().implicitlyWait(20,TimeUnit.SECONDS);
         WebElement textBodyline =driver.findElement(By.xpath("//textarea[contains(@class, 'editor-default-block-appender')]"));
         textBodyline.click();
-        driver.findElement(By.xpath("//p[@role='textbox']")).sendKeys("This is your new post.");
+        driver.findElement(By.xpath("//p[@role='textbox']")).sendKeys(textBody);
         driver.manage().timeouts().implicitlyWait(20,TimeUnit.SECONDS);
         btnPublish.isEnabled();
         btnPublish.click();
@@ -88,7 +90,17 @@ public class testclass {
     }
 
     public void checkArticle() {
-        driver.navigate().to("http://127.0.0.1/wordpress/wp-login.php");
+        driver.manage().timeouts().implicitlyWait(10,TimeUnit.SECONDS);
+        Authorization();
+        driver.manage().timeouts().implicitlyWait(10,TimeUnit.SECONDS);
+        addArticle();
+        driver.manage().timeouts().pageLoadTimeout(60, TimeUnit.SECONDS);
+        driver.findElement(By.xpath("//div[@class='components-notice__content']/a")).click();
+        driver.manage().timeouts().pageLoadTimeout(60, TimeUnit.SECONDS);
+        String post_header=driver.findElement(By.xpath("//header[@class='entry-header']")).getText();
+        Assert.assertEquals(post_header, Headline);
+        String post_textbody=driver.findElement(By.xpath("//div[@class='entry-content']/p")).getText();
+        Assert.assertEquals(post_textbody, textBody);
 
     }
 
