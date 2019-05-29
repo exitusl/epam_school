@@ -3,8 +3,11 @@
 
 <suite name="Suite1" >
     <test name="Authorization" >
+        <parameter name="baseUrl" value="http://v999140x.beget.tech/wp-login.php"/>
+        <parameter name="username" value="test_olga"/>
+        <parameter name="password" value="123456"/>
         <classes>
-            <class name="testclass"></class>
+            <class name="testsforWordPress.LoginTest"></class>
         </classes>
     </test>
 </suite>

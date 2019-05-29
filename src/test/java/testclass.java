@@ -26,7 +26,7 @@ public class testclass {
  //       driver.navigate().to("http://localhost/wordpress/wp-login.php");
         driver.navigate().to("http://v999140x.beget.tech/wp-login.php");
         driver.manage().timeouts().pageLoadTimeout(60, TimeUnit.SECONDS);
-        driver.manage().timeouts().implicitlyWait(10,TimeUnit.SECONDS);
+        driver.manage().timeouts().implicitlyWait(15,TimeUnit.SECONDS);
     }
 
     @Test
@@ -84,14 +84,12 @@ public class testclass {
         textBodyline.click();
         driver.findElement(By.xpath("//p[@role='textbox']")).sendKeys(textBody);
         driver.manage().timeouts().implicitlyWait(20,TimeUnit.SECONDS);
-        btnPublish.isEnabled();
+    //    btnPublish.isEnabled();
         btnPublish.click();
         btnPublish.click();
     }
-
+    @Test
     public void checkArticle() {
-        driver.manage().timeouts().implicitlyWait(10,TimeUnit.SECONDS);
-        Authorization();
         driver.manage().timeouts().implicitlyWait(10,TimeUnit.SECONDS);
         addArticle();
         driver.manage().timeouts().pageLoadTimeout(60, TimeUnit.SECONDS);
