@@ -9,7 +9,7 @@ public class LoginTest extends BaseTest {
     @Test(description = "авторизация")
     public void successLogin(){
         HomePage homepage = new HomePage(driver);
-        homepage.goToLoginPage()
+        homepage.openHomePage()
                 .loginTocabinet("test_olga", "123456");
     }
 }
