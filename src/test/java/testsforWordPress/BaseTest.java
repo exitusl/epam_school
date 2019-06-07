@@ -8,8 +8,8 @@ import org.testng.annotations.BeforeClass;
 
 public class BaseTest {
     public WebDriver driver;
-    public String username="test_olga";
-    private String password="123456";
+ //   protected String username="test_olga";
+ //   protected String password="123456";
 
     @BeforeClass
     public void setup(){

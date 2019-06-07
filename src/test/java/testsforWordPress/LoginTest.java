@@ -1,5 +1,6 @@
 package testsforWordPress;
 
+import org.testng.annotations.Parameters;
 import org.testng.annotations.Test;
 import pages.BasePage;
 import pages.HomePage;
@@ -7,9 +8,10 @@ import pages.HomePage;
 public class LoginTest extends BaseTest {
 
     @Test(description = "авторизация")
-    public void successLogin(){
+    @Parameters({"username", "password"})
+    public void successLogin(String username, String password){
         HomePage homepage = new HomePage(driver);
         homepage.openHomePage()
-                .loginTocabinet("test_olga", "123456");
+                .loginTocabinet(username, password);
     }
 }
