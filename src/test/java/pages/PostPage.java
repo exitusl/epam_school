@@ -24,16 +24,16 @@ public class PostPage extends BasePage {
     public void clickBtnAddNote() {
         Actions actions = new Actions(driver);
         actions.moveToElement(toWebElement (add)).build().perform();
-        wait.until(ExpectedConditions.visibilityOf((WebElement) addNote)).click();
+        wait.until(ExpectedConditions.visibilityOf(toWebElement (addNote))).click();
     }
 
     public void writeTitleAndBody(String Title, String BodyText) {
         writeText(textHeadline, Title);
-        ((WebElement)textBodyline).click();
+        (toWebElement (textBodyline)).click();
         writeText(textBodyBox,BodyText);
         driver.manage().timeouts().implicitlyWait(20, TimeUnit.SECONDS);
-        ((WebElement)btnPublish).click();
-        ((WebElement)btnPublish).click();
+        (toWebElement (btnPublish)).click();
+        (toWebElement (btnPublish)).click();
     }
     public String getLastTitle() {
         String lastTitle = driver.findElement(By.xpath("//article[position()=1]//header//a"))
