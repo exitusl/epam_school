@@ -5,11 +5,11 @@
     <parameter name="loginLink" value="http://v999140x.beget.tech/wp-login.php"/>
     <parameter name="username" value="test_olga"/>
     <parameter name="password" value="123456"/>
-    <test name="LoginTest" >
-        <classes>
-            <class name="testsforWordPress.LoginTest"></class>
-        </classes>
-    </test>
+<!--    <test name="LoginTest" >-->
+<!--        <classes>-->
+<!--            <class name="testsforWordPress.LoginTest"></class>-->
+<!--        </classes>-->
+<!--    </test>-->
     <test name="AddPost">
         <classes>
             <class name="testsforWordPress.PostTest"></class>

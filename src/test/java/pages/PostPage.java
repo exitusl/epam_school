@@ -20,6 +20,7 @@ public class PostPage extends BasePage {
      By textBodyline = By.xpath("//textarea[contains(@class, 'editor-default-block-appender')]");
      By textBodyBox = By.xpath("//p[@role='textbox']");
      By btnPublish = By.xpath("//div[@class='edit-post-header__settings']//button[contains(text(),'Опубликовать')]");
+     By BtnPublishsecond = By.xpath("//button[contains(@class, 'components-button editor-post-publish-button is-button is-default is-primary is-large') and contains(text(),'Опубликовать')]");
 
     public void clickBtnAddNote() {
         Actions actions = new Actions(driver);
@@ -33,7 +34,8 @@ public class PostPage extends BasePage {
         writeText(textBodyBox,BodyText);
         driver.manage().timeouts().implicitlyWait(20, TimeUnit.SECONDS);
         (toWebElement (btnPublish)).click();
-        (toWebElement (btnPublish)).click();
+        (toWebElement (BtnPublishsecond)).click();
+ //       wait.until(ExpectedConditions.visibilityOf(toWebElement (add))).click();
     }
     public String getLastTitle() {
         String lastTitle = driver.findElement(By.xpath("//article[position()=1]//header//a"))
