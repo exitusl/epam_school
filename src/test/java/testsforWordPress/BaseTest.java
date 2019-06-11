@@ -3,17 +3,17 @@ package testsforWordPress;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.chrome.ChromeDriver;
 import org.openqa.selenium.chrome.ChromeOptions;
-import org.testng.annotations.AfterClass;
-import org.testng.annotations.BeforeClass;
+import org.testng.annotations.*;
+import pages.HomePage;
 
 public class BaseTest {
     public WebDriver driver;
-    protected String username="test_olga";
-    protected String password="123456";
+ //   protected String username="test_olga";
+ //   protected String password="123456";
     protected String Title="New Title";
     protected String BodyText="BodyText";
 
-    @BeforeClass
+    @BeforeTest
     public void setup(){
         ChromeOptions options = new ChromeOptions();
         options.addArguments("disable-infobars");
@@ -21,8 +21,15 @@ public class BaseTest {
         driver = new ChromeDriver();
         driver.manage().window().maximize();
     }
+    @BeforeTest(dependsOnMethods = "setup")
+    @Parameters({"username", "password"} )
+    public void login(String username, String password){ ;
+        HomePage homepage = new HomePage(driver);
+        homepage.openHomePage()
+                .loginTocabinet(username, password);
+    }
 
-    @AfterClass
+    @AfterTest
     public void teardown(){
         driver.quit();
     }

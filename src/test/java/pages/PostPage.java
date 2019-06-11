@@ -14,16 +14,16 @@ public class PostPage extends BasePage {
         super(driver);
     }
 
-    By add = By.xpath("//div[@aria-label='Верхняя панель']//span[contains (text(), 'Добавить')]");
-    By addNote = By.xpath("//li[@class='menupop']//a[contains(text(),'Запись')]");
-    By textHeadline = By.xpath("//div[@class='editor-post-title']//textarea");
-    By textBodyline = By.xpath("//textarea[contains(@class, 'editor-default-block-appender')]");
-    By textBodyBox = By.xpath("//p[@role='textbox']");
-    By btnPublish = By.xpath("//div[@class='edit-post-header__settings']//button[contains(text(),'Опубликовать')]");
+     By add = By.xpath("//div[@aria-label='Верхняя панель']//span[contains (text(), 'Добавить')]");
+     By addNote = By.xpath("//li[@class='menupop']//a[contains(text(),'Запись')]");
+     By textHeadline = By.xpath("//div[@class='editor-post-title']//textarea");
+     By textBodyline = By.xpath("//textarea[contains(@class, 'editor-default-block-appender')]");
+     By textBodyBox = By.xpath("//p[@role='textbox']");
+     By btnPublish = By.xpath("//div[@class='edit-post-header__settings']//button[contains(text(),'Опубликовать')]");
 
     public void clickBtnAddNote() {
         Actions actions = new Actions(driver);
-        actions.moveToElement((WebElement) add).build().perform();
+        actions.moveToElement(toWebElement (add)).build().perform();
         wait.until(ExpectedConditions.visibilityOf((WebElement) addNote)).click();
     }
 
@@ -35,4 +35,19 @@ public class PostPage extends BasePage {
         ((WebElement)btnPublish).click();
         ((WebElement)btnPublish).click();
     }
+    public String getLastTitle() {
+        String lastTitle = driver.findElement(By.xpath("//article[position()=1]//header//a"))
+                .getText();
+        return lastTitle;
+    }
+    public String getLastTextBody() {
+        String lastText = driver.findElement(By.xpath("//article[position()=1]" +
+                "//div[contains(@class,'entry-content')]//p"))
+                .getText();
+        return lastText;
+    }
+    private WebElement toWebElement(By element){
+        return driver.findElement(element);
+    }
+
 }
