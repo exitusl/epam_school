@@ -35,7 +35,6 @@ public class PostPage extends BasePage {
         driver.manage().timeouts().implicitlyWait(20, TimeUnit.SECONDS);
         (toWebElement (btnPublish)).click();
         (toWebElement (BtnPublishsecond)).click();
- //       wait.until(ExpectedConditions.visibilityOf(toWebElement (add))).click();
     }
     public String getLastTitle() {
         String lastTitle = driver.findElement(By.xpath("//article[position()=1]//header//a"))
